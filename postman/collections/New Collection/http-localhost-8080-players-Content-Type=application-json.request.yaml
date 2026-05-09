@@ -1,0 +1,16 @@
+$kind: http-request
+name: http://localhost:8080/players?Content-Type=application/json
+url: http://localhost:8080/players
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: "{\r
+
+    \  \"username\": \"dev\",\r
+
+    \  \"score\": 100\r
+
+    }"
+order: 2766921826753730
