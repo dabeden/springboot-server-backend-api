@@ -8,9 +8,9 @@ body:
   type: json
   content: "{\r
 
-    \  \"username\": \"dev\",\r
+    \  \"username\": \"rick\",\r
 
-    \  \"score\": 100\r
+    \  \"score\": 300\r
 
     }"
 order: 2766921826753730

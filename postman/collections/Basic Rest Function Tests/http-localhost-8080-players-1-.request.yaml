@@ -1,0 +1,8 @@
+$kind: http-request
+name: http://localhost:8080/players/1/
+url: http://localhost:8080/players/1
+method: PUT
+body:
+  type: json
+  content: "{\r\n  \"username\": \"dLava\"\r\n}"
+order: 4500639149622629

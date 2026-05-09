@@ -29,6 +29,14 @@ public class PlayerController {
         return service.getById(id);
     }
 
+    @PostMapping("/{id}/hit")
+    public Player hit(
+        @PathVariable Long id,
+        @RequestParam(required = false, defaultValue = "1") int amount
+    ) {
+        return service.incrementScore(id, amount);
+    }
+
    // @PostMapping
    // public Player update(@PathVariable Long id, @RequestBody Player player) {
     //    return service.update(id,player);
@@ -43,6 +51,11 @@ public class PlayerController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id){
         service.delete(id);
+    }
+
+    @PutMapping("/{id}")
+    public Player update(@PathVariable Long id, @RequestBody Player updated){
+        return service.updatePlayer(id, updated);
     }
 
 }

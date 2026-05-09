@@ -1,0 +1,10 @@
+$kind: http-request
+name: http://localhost:8080/players/1/hit?amount=5
+url: http://localhost:8080/players/1/hit?amount=5
+method: POST
+queryParams:
+  amount: "5"
+body:
+  type: json
+  content: ""
+order: 4376228836773562

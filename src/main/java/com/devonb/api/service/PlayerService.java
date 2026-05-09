@@ -38,5 +38,20 @@ public class PlayerService {
     public void delete(Long id) {
         repo.deleteById(id);
     }
-    
+
+    public Player incrementScore(Long id, int amount){
+        Player player = repo.findById(id)
+        .orElseThrow(() -> new RuntimeException("Player not found with id: " + id));
+        
+        player.setScore(player.getScore() + amount);
+        return repo.save(player);
+    }
+
+    public Player updatePlayer(Long id, Player updated){
+        Player player = repo.findById(id)
+            .orElseThrow(() -> new RuntimeException("Player not found with id: " + id));
+        player.setUsername(updated.getUsername());
+        //player.setScore(updated.getScore());
+        return repo.save(player);
+    }
 }
