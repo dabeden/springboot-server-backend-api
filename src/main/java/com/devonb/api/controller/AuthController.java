@@ -4,8 +4,11 @@ import com.devonb.api.dto.AuthRequest;
 import com.devonb.api.model.Player;
 import com.devonb.api.repository.PlayerRepository;
 import com.devonb.api.service.JwtService;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Map;
 
@@ -40,24 +43,27 @@ public class AuthController {
 
 
     }
-
+    
     @PostMapping("/login")
     public Map<String, String> login(@RequestBody AuthRequest request) {
+
         Player player = playerRepository
             .findByUsername(request.getUsername())
-            .orElseThrow(() -> new RuntimeException("User not found"));
-    
+            .orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials")
+            );
 
-    boolean validPassword = passwordEncoder.matches(request.getPassword(), player.getPassword());
+        boolean validPassword = passwordEncoder.matches(
+            request.getPassword(),
+            player.getPassword()
+        );
 
-    if (!validPassword) {
-        throw new RuntimeException("Invalid password");   
+        if (!validPassword) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials");
+        }
+
+        String token = jwtService.generateToken(player.getUsername());
+
+        return Map.of("token", token);
     }
-
-    String token = jwtService.generateToken(player.getUsername());
-
-    return Map.of("token", token);
-    
-    }
-
 }

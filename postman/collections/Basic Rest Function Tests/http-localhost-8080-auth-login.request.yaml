@@ -1,0 +1,16 @@
+$kind: http-request
+name: http://localhost:8080/auth/login
+url: http://localhost:8080/auth/login
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: "{\r
+
+    \  \"username\": \"mistert\",\r
+
+    \  \"password\": \"pitythefool\"\r
+
+    }"
+order: 4501831809251536
